@@ -1,12 +1,14 @@
 /*
 	Author  : Stéphane Küng
-	Comment : Command line Directory for HEPIA
+	Comment : Command line Directory for hepia
 	Date    : 2 Juin 2017
 	Version : 0.0.1
 */
 
+//Package
 package main
 
+//Imports
 import (
 	"fmt"
 	"io"
@@ -21,8 +23,10 @@ import (
 	"golang.org/x/net/html/charset"
 )
 
+//URL of the directory
 const url string = "http://hepia.hesge.ch/fr/accueil/annuaire/annuaire-detaille/?listeNom=tous&listeFonction=tous&listePole=tous&listeFiliere=tous&listeInstitut=tous&efRecherche=$1&pbEnvoyer=envoyer"
 
+//Main function
 func main() {
 
 	if len(os.Args) < 2 {
@@ -65,12 +69,14 @@ func main() {
 	return
 }
 
+//Print a list of contacts
 func printContacts(contacts [][]string) {
 	for _, element := range contacts {
 		fmt.Printf("%-7s %-12s %s\n", element[2][13:], element[0], element[1])
 	}
 }
 
+//Extract all contact from the hepia web page
 func getContacts(node *html.Node) ([][]string, bool) {
 
 	contacts := [][]string{}
